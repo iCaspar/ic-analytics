@@ -1,1 +1,7 @@
-/build
+/bin
+/vendor
+config.codekit3
+
+.DS_Store
+.Trashes
+Thumbs.db

@@ -4,7 +4,7 @@
  *
  * @author: Caspar Green <https://caspar.green/>
  * @package: ICaspar/Analytics
- * @version: 1.0.0
+ * @since: 1.0.0
  *
  * @wordpress-plugin
  * Plugin Name:     iCaspar Analytics
