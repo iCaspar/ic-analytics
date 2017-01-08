@@ -45,7 +45,7 @@ if ( ! defined( 'ICASPAR_ANALYTICS_ASSETS_URL' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_VERSION' ) ) {
-	define( 'ICASPAR_ANALYTICS_VERSION', '1.0.0' );
+	define( 'ICASPAR_ANALYTICS_VERSION', '1.0.1' );
 }
 
 if ( version_compare( $GLOBALS['wp_version'], '4.7', '>=' ) ) {

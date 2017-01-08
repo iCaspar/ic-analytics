@@ -14,4 +14,5 @@ The tracking script is added to all front facing pages when the user is not logg
 
 ### Use
 
-Just enter your analytics tracking ID (UA-XXXXXXX-YY) in the customizer Site Identity panel and you're good to go.
+Just enter your analytics tracking ID (UA-XXXXXXX-YY) in the customizer Site Identity panel, or on the Settings > General 
+page of your dashboard and you're good to go.

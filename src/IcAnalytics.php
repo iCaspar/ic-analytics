@@ -31,6 +31,7 @@ class IcAnalytics {
 	 * @return void
 	 */
 	private function setPluginHooks() {
+		add_action( 'admin_init', [ $this, 'addTrackingCodeOption' ] );
 		add_action( 'customize_register', [ $this, 'doCustomizerMods' ] );
 
 		if ( $this->trackingId ) {
@@ -48,6 +49,34 @@ class IcAnalytics {
 	}
 
 	/**
+	 * Callback to add the GA Tracking Code Option on the WP Dashboard's General Settings page.
+	 * @return void
+	 */
+	public function addTrackingCodeOption() {
+		register_setting( 'general', 'ic-ga-tracking-id', [ $this, 'validateTrackingCode' ] );
+		add_settings_field(
+			'ic-ga-tracking-id',
+			__( 'Google Analytics Tracking ID', 'icaspar' ),
+			[ $this, 'renderGaTrackingIdField' ],
+			'general',
+			'default',
+			[ 'label_for' => 'ic-ga-tracking-id' ]
+		);
+	}
+
+	/**
+	 * Callback to display the GA Tracking ID field on the WP Dashboard's General Settings page.
+	 *
+	 * @param array $args Arguments passed from add_settings_field.
+	 *
+	 * @return void
+	 */
+	public function renderGaTrackingIdField( $args ) {
+		$value = $this->trackingId ?: '';
+		echo '<input type="text" id="' . $args['label_for'] . '" name="' . $args['label_for'] . '" value="' . $value . '" placeholder="UA-XXXXXXX-ZZ" />';
+	}
+
+	/**
 	 * Callback to modify the WP Customizer.
 	 *
 	 * @param \WP_Customize_Manager $wp_customize
@@ -58,9 +87,7 @@ class IcAnalytics {
 		$wp_customize->add_setting( 'ic-ga-tracking-id', [
 			'type'              => 'option',
 			'capability'        => 'administrator',
-			'sanitize_callback' => function ( $input ) {
-				return preg_match( '/\bUA-\d{6,10}-\d{1,4}\b/', $input ) ? $input : '';
-			},
+			'sanitize_callback' => [ $this, 'validateTrackingCode' ],
 			'default'           => '',
 			'transport'         => 'postMessage'
 		] );
@@ -77,7 +104,18 @@ class IcAnalytics {
 	}
 
 	/**
-	 * Add the Google Analytics script to the WordPress script queue.
+	 * Validate a GA Tracking Code input.
+	 *
+	 * @param string $input User-entered GA Tracking Code
+	 *
+	 * @return string Valid tracking code or empty string.
+	 */
+	public function validateTrackingCode( $input ) {
+		return preg_match( '/\bUA-\d{6,10}-\d{1,4}\b/', $input ) ? $input : '';
+	}
+
+	/**
+	 * Callback to add the Google Analytics script to the WordPress script queue.
 	 * @return void
 	 */
 	public function enqueueGaScript() {
