@@ -59,7 +59,7 @@ class IcAnalytics {
 			'type'              => 'option',
 			'capability'        => 'administrator',
 			'sanitize_callback' => function ( $input ) {
-				return preg_match( '\bUA-\d{6,10}-\d{1,4}\b', $input ) ? $input : '';
+				return preg_match( '/\bUA-\d{6,10}-\d{1,4}\b/', $input ) ? $input : '';
 			},
 			'default'           => '',
 			'transport'         => 'postMessage'
