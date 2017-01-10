@@ -10,7 +10,7 @@
  * Plugin Name:     iCaspar Analytics
  * Plugin URI:      https://caspar.green/
  * Description:     A minimalist plugin to include Google Analytics.
- * Version:         1.0.1
+ * Version:         1.0.2
  * Author:          Caspar Green
  * Author URI:      https://caspar.green/
  * Text Domain:     icaspar
@@ -45,7 +45,7 @@ if ( ! defined( 'ICASPAR_ANALYTICS_ASSETS_URL' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_VERSION' ) ) {
-	define( 'ICASPAR_ANALYTICS_VERSION', '1.0.1' );
+	define( 'ICASPAR_ANALYTICS_VERSION', '1.0.2' );
 }
 
 if ( version_compare( $GLOBALS['wp_version'], '4.7', '>=' ) ) {

@@ -6,6 +6,11 @@ Add the Google Analytics website tracking script to a WordPress website.
 
 The tracking script is added to all front facing pages when the user is not logged in as an administrator.
 
+### Requirements
+
+* WordPress version 4.7
+* PHP version >= 5.6.3
+
 ### Installation
 
 1. Download the [build/ic-analytics.zip](https://github.com/iCaspar/ic-analytics/blob/master/ic-analytics.zip) installation file.
