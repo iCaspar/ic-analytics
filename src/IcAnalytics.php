@@ -73,7 +73,7 @@ class IcAnalytics {
 	 */
 	public function renderGaTrackingIdField( $args ) {
 		$value = $this->trackingId ?: '';
-		echo '<input type="text" id="' . $args['label_for'] . '" name="' . $args['label_for'] . '" value="' . $value . '" placeholder="UA-XXXXXXX-ZZ" />';
+		echo '<input type="text" id="' . $args['label_for'] . '" name="' . $args['label_for'] . '" value="' . esc_attr( $value ) . '" placeholder="UA-XXXXXXX-ZZ" />';
 	}
 
 	/**
