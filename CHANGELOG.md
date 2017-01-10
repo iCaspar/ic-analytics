@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.0.2](https://github.com/iCaspar/ic-analytics/tree/1.0.2) (2017-01-10)
+[Full Changelog](https://github.com/iCaspar/ic-analytics/compare/1.0.1...1.0.2)
+
 ## [1.0.1](https://github.com/iCaspar/ic-analytics/tree/1.0.1) (2017-01-08)
 [Full Changelog](https://github.com/iCaspar/ic-analytics/compare/1.0.0...1.0.1)
 
