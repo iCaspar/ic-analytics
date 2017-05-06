@@ -35,7 +35,7 @@ class IcAnalytics {
 		add_action( 'customize_register', [ $this, 'doCustomizerMods' ] );
 
 		if ( $this->trackingId ) {
-			add_action( 'wp_enqueue_scripts', [ $this, 'enqueueGaScript' ] );
+			add_action( 'wp_head', [ $this, 'maybeRenderGaScript' ] );
 		}
 
 	}
@@ -123,5 +123,38 @@ class IcAnalytics {
 			wp_enqueue_script( 'ic-ga', ICASPAR_ANALYTICS_ASSETS_URL . 'min/analytics-min.js', [], ICASPAR_ANALYTICS_VERSION );
 			wp_localize_script( 'ic-ga', 'icGaTrackId', [ 'id' => $this->trackingId ] );
 		}
+	}
+
+	/**
+	 * Echo out the GA Script code, if the user isn't an admin.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return void
+	 */
+	public function maybeRenderGaScript() {
+		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
+			echo $this->getGaScript();
+		}
+	}
+
+	/**
+	 * Return the correct GA script with the tracking number in place.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return string
+	 */
+	private function getGaScript() {
+		return '<script>
+  (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,\'script\',\'https://www.google-analytics.com/analytics.js\',\'ga\');
+
+  ga(\'create\', \'' . $this->trackingId . '\', \'auto\');
+  ga(\'send\', \'pageview\');
+
+</script>';
 	}
 }
