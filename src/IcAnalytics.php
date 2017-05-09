@@ -116,6 +116,9 @@ class IcAnalytics {
 
 	/**
 	 * Callback to add the Google Analytics script to the WordPress script queue.
+	 *
+	 * @deprecated 1.1.0 Use maybeRenderGaScript()
+	 *
 	 * @return void
 	 */
 	public function enqueueGaScript() {
@@ -134,27 +137,8 @@ class IcAnalytics {
 	 */
 	public function maybeRenderGaScript() {
 		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
-			echo $this->getGaScript();
+			$html = include CASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
+			echo $html;
 		}
-	}
-
-	/**
-	 * Return the correct GA script with the tracking number in place.
-	 *
-	 * @since 1.1.0
-	 *
-	 * @return string
-	 */
-	private function getGaScript() {
-		return '<script>
-  (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,\'script\',\'https://www.google-analytics.com/analytics.js\',\'ga\');
-
-  ga(\'create\', \'' . $this->trackingId . '\', \'auto\');
-  ga(\'send\', \'pageview\');
-
-</script>';
 	}
 }

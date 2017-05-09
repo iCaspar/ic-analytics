@@ -25,11 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_PLUGIN_DIR' ) ) {
-	define( 'CASPAR_EXTENSIONS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'CASPAR_ANALYTICS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_CONFIG_DIR' ) ) {
-	define( 'CASPAR_EXTENSIONS_CONFIG_DIR', ICASPAR_ANALYTICS_PLUGIN_DIR . 'config/' );
+	define( 'CASPAR_ANALYTICS_CONFIG_DIR', ICASPAR_ANALYTICS_PLUGIN_DIR . 'config/' );
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_PLUGIN_URL' ) ) {
@@ -45,7 +45,7 @@ if ( ! defined( 'ICASPAR_ANALYTICS_ASSETS_URL' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_VERSION' ) ) {
-	define( 'ICASPAR_ANALYTICS_VERSION', '1.1.0' );
+	define( 'ICASPAR_ANALYTICS_VERSION', '1.1.1' );
 }
 
 if ( version_compare( $GLOBALS['wp_version'], '4.7', '>=' ) ) {
