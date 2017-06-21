@@ -137,7 +137,7 @@ class IcAnalytics {
 	 */
 	public function maybeRenderGaScript() {
 		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
-			$html = include CASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
+			$html = include ICASPAR_ANALYTICS_PLUGIN_DIR . '/views/ga-script.php';
 			echo $html;
 		}
 	}

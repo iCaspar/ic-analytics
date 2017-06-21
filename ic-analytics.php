@@ -29,7 +29,7 @@ if ( ! defined( 'ICASPAR_ANALYTICS_PLUGIN_DIR' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_CONFIG_DIR' ) ) {
-	define( 'CASPAR_ANALYTICS_CONFIG_DIR', ICASPAR_ANALYTICS_PLUGIN_DIR . 'config/' );
+	define( 'ICASPAR_ANALYTICS_CONFIG_DIR', ICASPAR_ANALYTICS_PLUGIN_DIR . 'config/' );
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_PLUGIN_URL' ) ) {
