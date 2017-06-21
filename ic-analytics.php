@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_PLUGIN_DIR' ) ) {
-	define( 'CASPAR_ANALYTICS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'ICASPAR_ANALYTICS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_CONFIG_DIR' ) ) {
