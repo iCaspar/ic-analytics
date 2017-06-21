@@ -24,6 +24,10 @@ page of your dashboard and you're good to go.
 
 ### Changelog
 
+#### 1.1.2
+Remove dev dependencies from composer.
+Fix misspelling of plugin directory constant.
+
 #### 1.1.1
 
 Move script html to its own view.
