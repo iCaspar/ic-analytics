@@ -24,6 +24,9 @@ page of your dashboard and you're good to go.
 
 ### Changelog
 
+#### 1.1.4
+Fix improper include.
+
 #### 1.1.3
 Fix reference to misspelled constant.
 
