@@ -137,8 +137,7 @@ class IcAnalytics {
 	 */
 	public function maybeRenderGaScript() {
 		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
-			$html = include ICASPAR_ANALYTICS_PLUGIN_DIR . '/views/ga-script.php';
-			echo $html;
+			include ICASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
 		}
 	}
 }
