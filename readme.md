@@ -13,14 +13,15 @@ The tracking script is added to all front facing pages when the user is not logg
 
 ### Installation
 
-1. Download the [ic-analytics.zip](https://github.com/iCaspar/ic-analytics/blob/master/dist/ic-analytics.zip) installation file.
+1. Download the [ic-analytics.zip](https://caspar.green/downloads/ic-analytics/ic-analytics.zip) 
+   installation file.
 2. Go to plugins > Add New on your WordPress dashboard. Click "Upload Plugin", select the zip file you just downloaded.
 3. Activate. Done!
 
 ### Use
 
-Just enter your analytics tracking ID (UA-XXXXXXX-YY) in the customizer Site Identity panel, or on the **Settings > General** 
-page of your dashboard and you're good to go.
+Just enter your analytics tracking ID (UA-XXXXXXX-YY) in the customizer Site Identity panel, or on the **Settings > 
+General** page of your dashboard and you're good to go.
 
 ### Changelog
 
