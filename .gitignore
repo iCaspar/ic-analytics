@@ -1,7 +1,5 @@
 /bin
 /vendor
-/build
-config.codekit3
 
 .DS_Store
 .Trashes
