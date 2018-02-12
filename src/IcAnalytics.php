@@ -27,6 +27,14 @@ class IcAnalytics {
 	}
 
 	/**
+	 * Get the GA Tracking ID from the DB Options table.
+	 * @return void
+	 */
+	private function getGaTrackingId() {
+		$this->trackingId = get_option( 'ic-ga-tracking-id' );
+	}
+
+	/**
 	 * Set hooks to tie plugin functions into WordPress.
 	 * @return void
 	 */
@@ -38,14 +46,6 @@ class IcAnalytics {
 			add_action( 'wp_head', [ $this, 'maybeRenderGaScript' ] );
 		}
 
-	}
-
-	/**
-	 * Get the GA Tracking ID from the DB Options table.
-	 * @return void
-	 */
-	private function getGaTrackingId() {
-		$this->trackingId = get_option( 'ic-ga-tracking-id' );
 	}
 
 	/**
@@ -115,20 +115,6 @@ class IcAnalytics {
 	}
 
 	/**
-	 * Callback to add the Google Analytics script to the WordPress script queue.
-	 *
-	 * @deprecated 1.1.0 Use maybeRenderGaScript()
-	 *
-	 * @return void
-	 */
-	public function enqueueGaScript() {
-		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
-			wp_enqueue_script( 'ic-ga', ICASPAR_ANALYTICS_ASSETS_URL . 'min/analytics-min.js', [], ICASPAR_ANALYTICS_VERSION );
-			wp_localize_script( 'ic-ga', 'icGaTrackId', [ 'id' => $this->trackingId ] );
-		}
-	}
-
-	/**
 	 * Echo out the GA Script code, if the user isn't an admin.
 	 *
 	 * @since 1.1.0
@@ -136,8 +122,14 @@ class IcAnalytics {
 	 * @return void
 	 */
 	public function maybeRenderGaScript() {
-		if ( ! current_user_can( 'administrator' ) || is_admin() ) {
-			include ICASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
+		if ( current_user_can( 'administrator' ) ) {
+			return;
 		}
+
+		if ( is_admin() ) {
+			return;
+		}
+
+		include ICASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
 	}
 }

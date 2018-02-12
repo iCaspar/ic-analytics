@@ -1,13 +1,14 @@
 {
   "name": "icaspar/icaspar-analytics",
-  "description": "Google Analytics Plugin for WordPress",
+  "description": "Minimalist Google Analytics Plugin for WordPress",
   "type": "plugin",
   "keywords": [
     "wordpress",
     "wp",
-    "plugin"
+    "plugin",
+    "google analytics"
   ],
-  "homepage": "https://caspar.green",
+  "homepage": "https://iCasparWebDevelopment.com",
   "license": "GPL-2.0+",
   "authors": [
     {
@@ -16,13 +17,17 @@
     }
   ],
   "require": {
-    "php": ">=5.6.3"
+    "php": ">=7.1"
   },
   "require-dev": {
+    "phpunit/phpunit": "~6",
+    "brain/monkey": "^2.2"
   },
   "autoload": {
     "psr-4": {
-      "ICaspar\\Analytics\\": "src/"
+      "ICaspar\\Analytics\\": "src/",
+      "ICaspar\\Analytics\\Tests\\PhpUnit\\Unit\\": "tests/PhpUnit/Unit",
+      "ICaspar\\Analytics\\Tests\\PhpUnit\\Integration\\": "tests/PhpUnit/Integration"
     }
   },
   "autoload-dev": {
@@ -38,5 +43,9 @@
     "vendor-dir": "vendor",
     "bin-dir": "bin"
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "scripts": {
+    "test-unit": "\"bin/phpunit\" --testsuite unit --colors=always",
+    "test-integration": "\"bin/phpunit\" --testsuite integration --colors=always --configuration tests/phpunit/integration/phpunit.xml.dist"
+  }
 }
