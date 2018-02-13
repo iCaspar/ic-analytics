@@ -1,6 +1,6 @@
 # iCaspar Analytics
 
-https://travis-ci.org/iCaspar/ic-analytics.svg?branch=master
+[![Build Status](https://travis-ci.org/iCaspar/ic-analytics.svg?branch=master)](https://travis-ci.org/iCaspar/ic-analytics)
 
 ### A minimalist WordPress plugin to include Google Analytics on a website.
 
