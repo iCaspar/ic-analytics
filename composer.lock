@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f85a05f7be74d8ee7026e0354b33198",
+    "content-hash": "585b48133f0ff8a2a28674b073d22c70",
     "packages": [],
     "packages-dev": [
         {
@@ -219,12 +219,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "692466ec21d177bbc06916a18d5ba174e237bb8e"
+                "reference": "5201482d1f88813cfdd6450badf840d6e1f8adad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/692466ec21d177bbc06916a18d5ba174e237bb8e",
-                "reference": "692466ec21d177bbc06916a18d5ba174e237bb8e",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/5201482d1f88813cfdd6450badf840d6e1f8adad",
+                "reference": "5201482d1f88813cfdd6450badf840d6e1f8adad",
                 "shasum": ""
             },
             "require": {
@@ -276,7 +276,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2018-02-08T11:07:23+00:00"
+            "time": "2018-02-13T18:12:40+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1680,6 +1680,16 @@
                 "validate"
             ],
             "time": "2018-01-29T19:49:41+00:00"
+        },
+        {
+            "name": "xwp/wp-dev-lib",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xwp/wp-dev-lib.git",
+                "reference": "master"
+            },
+            "type": "library"
         }
     ],
     "aliases": [],
