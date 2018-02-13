@@ -8,12 +8,12 @@
  *
  * @wordpress-plugin
  * Plugin Name:     iCaspar Analytics
- * Plugin URI:      https://caspar.green/
+ * Plugin URI:      https://iCasparWebDevelopment.com/
  * Description:     A minimalist plugin to include Google Analytics.
- * Version:         1.0.2
+ * Version:         1.2
  * Author:          Caspar Green
  * Author URI:      https://caspar.green/
- * Text Domain:     icaspar
+ * Text Domain:     ic-analytics
  * Requires WP:     4.7
  * Requires PHP:    5.6.3
  */
@@ -45,7 +45,9 @@ if ( ! defined( 'ICASPAR_ANALYTICS_ASSETS_URL' ) ) {
 }
 
 if ( ! defined( 'ICASPAR_ANALYTICS_VERSION' ) ) {
-	define( 'ICASPAR_ANALYTICS_VERSION', '1.1.1' );
+	$plugin_data = get_file_data( __FILE__, [ 'Version' => 'Version' ], 'plugin' );
+	$version     = $plugin_data['Version'];
+	define( 'ICASPAR_ANALYTICS_VERSION', $version );
 }
 
 if ( version_compare( $GLOBALS['wp_version'], '4.7', '>=' ) ) {
