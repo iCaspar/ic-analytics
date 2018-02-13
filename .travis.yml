@@ -4,5 +4,18 @@ php:
   - "7.1"
   - "7.2"
 
+cache:
+  directories:
+    node_modules
+    vendor
+
 install:
   - composer install
+  - export DEV_LIB_PATH=vendor/xwp/wp-dev-lib
+  - source $DEV_LIB_PATH/travis.install.sh
+
+script:
+  - source ci/travis.sh
+
+after_script:
+  - source $DEV_LIB_PATH/travis.after_script.sh
