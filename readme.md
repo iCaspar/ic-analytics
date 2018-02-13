@@ -12,6 +12,7 @@ The tracking script is added to all front facing pages when the user is not logg
 
 * WordPress version 4.7
 * PHP version >= 5.6.3
+* Unit and Integration tests require PHP 7.1+
 
 ### Installation
 
@@ -27,33 +28,42 @@ General** page of your dashboard and you're good to go.
 
 ### Changelog
 
+#### 1.2
+
+* Add Unit and Integration tests.
+* Fix bug in conditions for GA script output.
+* Add Travis CI
+
 #### 1.1.4
-Fix improper include.
+
+* Fix improper include.
 
 #### 1.1.3
-Fix reference to misspelled constant.
+
+* Fix reference to misspelled constant.
 
 #### 1.1.2
-Remove dev dependencies from composer.
-Fix misspelling of plugin directory constant.
+
+* Remove dev dependencies from composer.
+* Fix misspelling of plugin directory constant.
 
 #### 1.1.1
 
-Move script html to its own view.
-Relocate installable zip file to /dist.
+* Move script html to its own view.
+* Relocate installable zip file to /dist.
 
 #### 1.1.0
 
-Fix Google Webmaster Tools not being able to read tracking code for site ownership verification.
+* Fix Google Webmaster Tools not being able to read tracking code for site ownership verification.
 
 #### 1.0.2
 
-Security patch: escapes saved tracking ID value for rendering admin fields.
+* Security patch: escapes saved tracking ID value for rendering admin fields.
 
 #### 1.0.1
 
-Add tracking ID field on the Settings > General admin page
+* Add tracking ID field on the Settings > General admin page
 
 #### 1.0.0
 
-Initial release.
+* Initial release.
