@@ -1,5 +1,7 @@
 # iCaspar Analytics
 
+https://travis-ci.org/iCaspar/ic-analytics.svg?branch=master
+
 ### A minimalist WordPress plugin to include Google Analytics on a website.
 
 Add the Google Analytics website tracking script to a WordPress website.
