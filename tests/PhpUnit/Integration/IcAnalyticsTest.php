@@ -12,27 +12,35 @@ define( 'ICASPAR_ANALYTICS_PLUGIN_DIR', IC_ANALYTICS_DIR );
 
 class IcAnalyticsTest extends WP_UnitTestCase {
 
-	public function testSetPluginHooks(): void {
+	public function testAddTrackingCodeShouldBeHookedToAdminInit(): void {
 		$analytics = new IcAnalytics();
 
-		$hooksAddTrackingCodeOptionToInit = has_action( 'admin_init', [ $analytics, 'addTrackingCodeOption' ] );
-		$this->assertEquals( 10, $hooksAddTrackingCodeOptionToInit );
+		$addTrackingCodeOptionToInit = has_action( 'admin_init', [ $analytics, 'addTrackingCodeOption' ] );
+		$this->assertEquals( 10, $addTrackingCodeOptionToInit );
+	}
 
-		$hooksDoCustomizeModsToCustomizeRegister = has_action( 'customize_register', [
-			$analytics,
-			'doCustomizerMods'
-		] );
-		$this->assertEquals( 10, $hooksDoCustomizeModsToCustomizeRegister );
+	public function testRenderGaScriptShouldNotBeHookedWhenTrackingIdNotDefined(): void {
+		$analytics = new IcAnalytics();
 
-		$hooksMaybeRenderGaScriptToWPHead = has_action( 'wp_head', [ $analytics, 'maybeRenderGaScript' ] );
-		$this->assertFalse( $hooksMaybeRenderGaScriptToWPHead );
+		$renderGaScriptToWPHead = has_action( 'wp_head', [ $analytics, 'renderGaScript' ] );
+		$this->assertFalse( $renderGaScriptToWPHead );
+	}
 
+	public function testRenderGaScriptShouldNotBeHookedWhenUserIsAdministrator(): void {
 		update_option( 'ic-ga-tracking-id', 'UA-1234567-12' );
+		wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+		$analytics = new IcAnalytics();
 
-		$analytics2 = new IcAnalytics();
+		$renderGaScriptToWPHead = has_action( 'wp_head', [ $analytics, 'renderGaScript' ] );
+		$this->assertFalse( $renderGaScriptToWPHead );
+	}
 
-		$hooksMaybeRenderGaScriptToWPHead = has_action( 'wp_head', [ $analytics2, 'maybeRenderGaScript' ] );
-		$this->assertEquals( 10, $hooksMaybeRenderGaScriptToWPHead );
+	public function testRenderGaScriptShouldBeHookedWhenNonAdminUserAndTrackingID(): void {
+		update_option( 'ic-ga-tracking-id', 'UA-1234567-12' );
+		$analytics = new IcAnalytics();
+
+		$renderGaScriptToWPHead = has_action( 'wp_head', [ $analytics, 'renderGaScript' ] );
+		$this->assertEquals( 10, $renderGaScriptToWPHead );
 	}
 
 	public function testAddTrackingCodeOption(): void {
@@ -57,55 +65,9 @@ class IcAnalyticsTest extends WP_UnitTestCase {
 		wp_set_current_user( 0 );
 
 		ob_start();
-		$analytics->maybeRenderGaScript();
+		$analytics->renderGaScript();
 		$output = ob_get_clean();
 
 		$this->assertTrue( true == $output );
-	}
-
-	public function testGaScriptOutputForLoggedInNonAdmin(): void {
-		$analytics = new IcAnalytics();
-
-		$editorUserID = $this->factory->user->create( [
-			'role' => 'editor',
-		] );
-
-		wp_set_current_user( $editorUserID );
-
-		ob_start();
-		$analytics->maybeRenderGaScript();
-		$output = ob_get_clean();
-		$this->assertTrue( true == $output );
-	}
-
-	public function testGaScriptNotOutputForAdmin(): void {
-		$analytics = new IcAnalytics();
-
-		$adminUserID = $this->factory->user->create( [
-			'role' => 'administrator',
-		] );
-
-		wp_set_current_user( $adminUserID );
-
-		ob_start();
-		$analytics->maybeRenderGaScript();
-		$output = ob_get_clean();
-		$this->assertEquals( '', $output );
-	}
-
-	public function testGaScriptNotRenderedOnAdminPage(): void {
-		$analytics = new IcAnalytics();
-
-		$editorUserID = $this->factory->user->create( [
-			'role' => 'editor',
-		] );
-
-		wp_set_current_user( $editorUserID );
-		set_current_screen( 'edit-page' );
-
-		ob_start();
-		$analytics->maybeRenderGaScript();
-		$output = ob_get_clean();
-		$this->assertEquals( '', $output );
 	}
 }

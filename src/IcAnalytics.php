@@ -40,12 +40,10 @@ class IcAnalytics {
 	 */
 	private function setPluginHooks() {
 		add_action( 'admin_init', [ $this, 'addTrackingCodeOption' ] );
-		add_action( 'customize_register', [ $this, 'doCustomizerMods' ] );
 
-		if ( $this->trackingId ) {
-			add_action( 'wp_head', [ $this, 'maybeRenderGaScript' ] );
+		if ( $this->trackingId && ! current_user_can( 'administrator' ) ) {
+			add_action( 'wp_head', [ $this, 'renderGaScript' ] );
 		}
-
 	}
 
 	/**
@@ -77,33 +75,6 @@ class IcAnalytics {
 	}
 
 	/**
-	 * Callback to modify the WP Customizer.
-	 *
-	 * @param \WP_Customize_Manager $wp_customize
-	 *
-	 * @return void
-	 */
-	public function doCustomizerMods( \WP_Customize_Manager $wp_customize ) {
-		$wp_customize->add_setting( 'ic-ga-tracking-id', [
-			'type'              => 'option',
-			'capability'        => 'administrator',
-			'sanitize_callback' => [ $this, 'validateTrackingCode' ],
-			'default'           => '',
-			'transport'         => 'postMessage'
-		] );
-
-		$wp_customize->add_control( 'ic-ga-tracking-id', [
-			'type'        => 'text',
-			'priority'    => 10,
-			'section'     => 'title_tagline',
-			'label'       => __( 'Google Analytics Tracking ID', 'icaspar' ),
-			'input_attrs' => [
-				'placeholder' => 'UA-XXXXXXX-ZZ'
-			],
-		] );
-	}
-
-	/**
 	 * Validate a GA Tracking Code input.
 	 *
 	 * @param string $input User-entered GA Tracking Code
@@ -121,15 +92,7 @@ class IcAnalytics {
 	 *
 	 * @return void
 	 */
-	public function maybeRenderGaScript() {
-		if ( current_user_can( 'administrator' ) ) {
-			return;
-		}
-
-		if ( is_admin() ) {
-			return;
-		}
-
+	public function renderGaScript() {
 		include ICASPAR_ANALYTICS_PLUGIN_DIR . 'views/ga-script.php';
 	}
 }

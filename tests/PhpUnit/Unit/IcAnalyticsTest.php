@@ -23,16 +23,18 @@ class IcAnalyticsTest extends TestCase {
 		parent::tearDown();
 	}
 
-	/**
-	 * @throws \PHPUnit\Framework\Exception
-	 */
-	public function test__construct(): void {
+	public function setupNonAdminContext(): void {
 		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
+		Monkey\Functions\when( 'current_user_can' )->justReturn( false );
+	}
+
+	public function test__construct(): void {
+		$this->setupNonAdminContext();
 		$this->assertInstanceOf( 'ICaspar\Analytics\IcAnalytics', new IcAnalytics() );
 	}
 
 	public function testAddTrackingCodeOption(): void {
-		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
+		$this->setupNonAdminContext();
 		Monkey\Functions\when( '__' )->justReturn( 'Google Analytics Tracking ID' );
 
 		$analytics = new IcAnalytics();
@@ -54,11 +56,8 @@ class IcAnalyticsTest extends TestCase {
 		$analytics->addTrackingCodeOption();
 	}
 
-	/**
-	 * @throws \PHPUnit\Framework\Exception
-	 */
 	public function testRenderGaTrackingIdField(): void {
-		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
+		$this->setupNonAdminContext();
 		Monkey\Functions\when( 'esc_attr' )->justReturn( 'UA-1234567-1' );
 
 		$args           = [
@@ -72,20 +71,8 @@ class IcAnalyticsTest extends TestCase {
 		$analytics->renderGaTrackingIdField( $args );
 	}
 
-	public function testDoCustomizerMods(): void {
-		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
-		Monkey\Functions\when( '__' )->justReturn();
-
-		$analytics = new IcAnalytics();
-		$customizer = \Mockery::mock('WP_Customize_Manager');
-
-		$customizer->shouldReceive('add_setting')->once();
-		$customizer->shouldReceive('add_control')->once();
-
-		$analytics->doCustomizerMods( $customizer );
-	}
-
 	public function testValidateTrackingCode(): void {
+		$this->setupNonAdminContext();
 		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
 
 		$validTrackingCode   = 'UA-1234567-12';
@@ -99,13 +86,8 @@ class IcAnalyticsTest extends TestCase {
 		$this->assertEquals( '', $bad );
 	}
 
-	/**
-	 * @throws \PHPUnit\Framework\Exception
-	 */
 	public function testMaybeRenderGaScript(): void {
-		Monkey\Functions\when( 'get_option' )->justReturn( 'UA-1234567-1' );
-		Monkey\Functions\when( 'current_user_can' )->justReturn( false );
-		Monkey\Functions\when( 'is_admin' )->justReturn( false );
+		$this->setupNonAdminContext();
 		Monkey\Functions\when( 'esc_attr' )->justReturn( 'UA-1234567-1' );
 		define( 'ICASPAR_ANALYTICS_PLUGIN_DIR', IC_ANALYTICS_DIR );
 
@@ -124,6 +106,6 @@ class IcAnalyticsTest extends TestCase {
 
 		$this->expectOutputString( $expectedOutput );
 
-		$analytics->maybeRenderGaScript();
+		$analytics->renderGaScript();
 	}
 }

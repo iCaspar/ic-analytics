@@ -28,11 +28,16 @@ General** page of your dashboard and you're good to go.
 
 ### Changelog
 
+#### 1.3
+
+* Remove settings fields from customizer. (Analytics is not display-related.)
+
 #### 1.2
 
 * Add Unit and Integration tests.
+* Remove deprecated `IcAnalytycs::enqueueGaScript()`.
 * Fix bug in conditions for GA script output.
-* Add Travis CI
+* Add Travis CI.
 
 #### 1.1.4
 
