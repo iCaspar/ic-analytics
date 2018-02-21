@@ -8,7 +8,7 @@
     "plugin",
     "google analytics"
   ],
-  "homepage": "https://iCasparWebDevelopment.com",
+  "homepage": "https://caspar.green/icaspar-analytics",
   "license": "GPL-2.0+",
   "authors": [
     {
@@ -34,6 +34,7 @@
     "php": ">=7.1"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "phpunit/phpunit": "~6",
     "brain/monkey": "^2.2",
     "xwp/wp-dev-lib": "^1.0.1"
@@ -56,7 +57,8 @@
   },
   "config": {
     "vendor-dir": "vendor",
-    "bin-dir": "bin"
+    "bin-dir": "bin",
+    "optimize-autoloader": true
   },
   "minimum-stability": "dev",
   "scripts": {
