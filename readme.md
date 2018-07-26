@@ -28,6 +28,10 @@ General** page of your dashboard and you're good to go.
 
 ### Changelog
 
+#### 1.3.1
+
+* Add `.gitattributes` file.
+
 #### 1.3
 
 * Remove settings fields from customizer. (Analytics is not display-related.)
